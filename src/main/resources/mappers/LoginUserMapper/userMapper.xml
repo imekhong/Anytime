@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anytime.root.user.dao.UserDAO">
+
+	<resultMap type="com.anytime.root.user.dto.UserDTO"
+		id="userDto">
+		<result property="id" column="id" />
+		<result property="createDate" column="createDate" />
+		<result property="email" column="email" />
+		<result property="auth" column="auth" />
+		<result property="passWord" column="passWord" />
+		<result property="rule" column="rule" />
+		<result property="username" column="username" />
+		<result property="age" column="age" />
+		<result property="ageGroup" column="ageGroup" />
+		<result property="grade" column="grade" />
+		<result property="enterYear" column="enterYear" />
+		<result property="school" column="school" />
+		<result property="permissions" column="permissions" />
+		<result property="expirationDate" column="expiration_date" />
+
+	</resultMap>
+
+
+
+	<insert id="insertUser">
+		insert into anyTimeUser
+		values(Autoadd.NEXTVAL,sysdate,#{email},#{auth},#{passWord},#{rule},#{username},#{age},#{ageGroup},#{grade},#{enterYear},#{school},
+		#{permissions} , sysdate + (INTERVAL '3' YEAR))
+	</insert>
+
+	<select id="SelectUserInfoCheck" resultMap="userDto">
+		select * from anyTimeUser where
+		email = #{email}
+	</select>
+
+	<select id="loginUser" resultMap="userDto">
+		select * from anyTimeUser where
+		email = #{email}
+	</select>
+
+	<select id="AllUserList" resultMap="userDto">
+		select * from anyTimeUser
+	</select>
+
+	<update id="changePermissionsTure">
+		update anyTimeUser set permissions='true' where email
+		= #{email}
+	</update>
+
+	<update id="changePermissionsFalse">
+		update anyTimeUser set permissions='false' where
+		email = #{email}
+	</update>
+
+
+
+</mapper>

@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+label {
+	font-weight: bold;
+}
+
+
+input {
+	border-radius: 15px;
+}

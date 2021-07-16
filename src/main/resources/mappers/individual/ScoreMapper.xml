@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.anytime.root.individual.repository.ScoreRepository">
+	<resultMap type="com.anytime.root.individual.dto.Score" id="scoreMap">
+		<result property="itemNo" column="item_no"/>
+		<result property="id" column="id"/>
+		<result property="semester" column="semester"/>
+		<result property="type" column="type"/>
+		<result property="subject" column="subject"/>
+		<result property="score" column="score"/>
+	</resultMap>
+	<select id="countById" parameterType="String" resultType="int">
+		select count(*) from scores where id = #{id}
+	</select>
+	<select id="getItemNo" parameterType="String" resultType="int">
+		select * from 
+		 (select item_no from scores where id = #{id} order by item_no desc)
+		 where rownum = 1
+	</select>
+	<select id="getScore" resultMap="scoreMap">
+		select * from scores where semester = #{semester} and
+		<choose>
+			<when test="selc == 'all'">
+				id = #{id}
+			</when>
+			<when test="selc == 'term'">
+				id = #{id} and (type = 'middle' or type = 'final')
+			</when>
+			<when test="selc == 'mock'">
+				id = #{id} and (type = 'march' or type = 'june' or type = 'september')
+			</when>
+			<otherwise>
+				id = #{id} and type = #{selc}
+			</otherwise>
+		</choose>
+		order by case type 
+		when 'middle' then 1 when 'final' then 2 when 'march' then 3 when 'june' then 4 else 5 end		
+	</select>
+	<delete id="deleteByItemNo">
+		delete from scores where id = #{id} and item_no = #{itemNo}
+	</delete>
+	<insert id="add">
+		insert into scores(item_no, id, semester, type, subject, score)
+		values(#{itemNo}, #{id}, #{semester}, #{type}, #{subject}, #{score})
+	</insert>
+	<update id="modify">
+		update scores set type = #{type}, subject = #{subject}, score = #{score}
+		 where id = #{id} and item_no = #{itemNo}
+	</update>
+	<delete id="reset">
+		delete from scores where semester = #{semester} and
+		<choose>
+			<when test="selc == 'all'">
+				id = #{id}
+			</when>
+			<when test="selc == 'term'">
+				id = #{id} and (type = 'middle' or type = 'final')
+			</when>
+			<when test="selc == 'mock'">
+				id = #{id} and (type = 'march' or type = 'june' or type = 'september')
+			</when>
+			<otherwise>
+				id = #{id} and type = #{selc}
+			</otherwise>
+		</choose>
+	</delete>
+	<select id="getSubjectList" resultType="String">
+		select subject from scores where id = #{id} and semester = #{semester} group by subject order by subject asc
+	</select>
+	<select id="getForChart" resultType="Object">
+		select * from(select type, subject, score from scores where id = #{id} and semester = #{semester})
+		pivot(max(score) for subject in
+		<foreach collection="subject_list" item="name" open="(" close=")" separator=",">
+			'${name}' as ${name}
+		</foreach>
+		)order by case type 
+		when 'middle' then 1 when 'final' then 2 when 'march' then 3 when 'june' then 4 else 5 end
+	</select>
+	<select id="getScoreForChart"  resultType="Integer">
+		select score from scores where id = #{id} and semester = #{semester} and type=#{type}
+		order by subject asc
+	</select>
+</mapper>

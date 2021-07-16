@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anytime.root.chat.dao.ChatDAO">
+
+<resultMap type="com.anytime.root.chat.dto.ChatDTO" id="chatDTO">
+<result property="chatId" column="chatId"/>
+<result property="sendUser" column="sendUser"/>
+<result property="receiveUser" column="receiveUser"/>
+<result property="chatcontent" column="chatcontent"/>
+<result property="createdate" column="createdate"/>
+
+</resultMap>
+
+<insert id="InsertSendChat">
+insert into chatBoard values(AutoAddChatId.NEXTVAL,#{sendUser},#{receiveUser},#{chatcontent},sysdate)
+</insert>
+
+<select id="reseiveSelectChatUser" resultMap="chatDTO">
+select *from chatBoard where receiveUser = #{receiveUser}
+</select>
+
+<delete id="deleteOne">
+delete from chatBoard where chatId = #{chatId}
+</delete>
+
+<delete id="deleteAll">
+delete from chatBoard where receiveUser = #{receiveUser}
+</delete>
+
+
+
+
+</mapper>
