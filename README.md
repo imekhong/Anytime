@@ -70,12 +70,16 @@
 
 ## 화면 설계
 ### Main 화면 프로토타입
+<img width="475" alt="메인페이지" src="https://user-images.githubusercontent.com/78437105/126044520-33a0e74b-2b09-4659-adda-210287ba89cc.png">
 
 ### 게시판 화면 프로토타입
+<img width="711" alt="게시판" src="https://user-images.githubusercontent.com/78437105/126044526-afe15959-0240-4e25-b1ad-2a3668c82ab1.png">
 
 ### 시간표 화면 프로토타입
+<img width="634" alt="시간표" src="https://user-images.githubusercontent.com/78437105/126044529-1eb2cc8a-4dc4-4be2-856f-7759784cddf0.png">
 
 ### 성적계산기 화면 프로토타입
+<img width="339" alt="점수 계산기" src="https://user-images.githubusercontent.com/78437105/126044554-7c190713-ec08-4fc3-8414-df7a0ed560c9.png">
 
 ## 프로젝트 DB ERD
 
