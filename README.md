@@ -15,6 +15,7 @@
  - 책방: 중고책 판매/구매 거래, 쪽지로 대화
 
 <img width="693" alt="홈페이지 구성도" src="https://user-images.githubusercontent.com/78437105/126042748-b390395a-3611-49c3-9644-a1b7ac86bf51.png">
+
 ---
 ## 프로젝트 주요기능
 # 회원가입: <span style="color:green;">dpound</span>
