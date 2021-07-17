@@ -18,15 +18,15 @@
 
 ---
 ## 프로젝트 주요기능
-# 회원가입: <span style="color:green;">dpound</span>
- - 카카오계정, 일반회원가입, (+추가: <span style="color:orange;">imekhong</span>)네이버계정
- - 일반회원가입: 이메일인증, (+추가: <span style="color:orange;">imekhong</span>)문자인증
+# 회원가입: dpound
+ - 카카오계정, 일반회원가입, (+추가: imekhong)네이버계정
+ - 일반회원가입: 이메일인증, (+추가: imekhong)문자인증
  - 공통: 학교입력(지도에서 검색하여 선택)
 
-# 로그인, 로그아웃: <span style="color:green;">dpound</span>
- - 카카오로그인, 일반로그인, (+추가: <span style="color:orange;">imekhong</span>)네이버로그인
+# 로그인, 로그아웃: dpound
+ - 카카오로그인, 일반로그인, (+추가: imekhong)네이버로그인
 
-# 게시판: <span style="color:orange;">imekhong</span>
+# 게시판: imekhong
  - 자유게시판, 학교게시판(비밀게시판, 동아리게시판, 학교정보게시판, 진학진로게시판)
  - 글목록, 글읽기(+조회수), 글쓰기(summernote), 글수정, 글삭제
  - 댓글, 대댓글, 수정/삭제 
@@ -34,25 +34,25 @@
  - 좋아요
  - 내가 쓴 글, 내가 쓴 댓글
 
-# 시간표: <span style="color:orange;">imekhong</span>
+# 시간표: imekhong
  - 시간표 추가, 수정, 삭제(UI 시간표 그리기)
  - 시간표 이미지로 저장(html2canvas)
 
-# 성적계산기: <span style="color:orange;">imekhong</span>
+# 성적계산기: imekhong
  - 성적 입력, 수정, 삭제
  - 성적 분포 그래프(Google Chart)
 
-# 책방(중고거래): <span style="color:green;">dpound</span>
+# 책방(중고거래): dpound
  - 책판매 글 쓰기, 수정, 판매완료(글 삭제)
  - 쪽지(책거래)
 
 # 관리자
- - 회원가입한 회원 접근/사용 승인(승인전 게시판, 책방 기능 사용 불가) : <span style="color:green;">dpound</span>
- - 게시글, 댓글 삭제 권한 : <span style="color:orange;">imekhong</span>
+ - 회원가입한 회원 접근/사용 승인(승인전 게시판, 책방 기능 사용 불가) : dpound
+ - 게시글, 댓글 삭제 권한 : imekhong
 ---
 ## 개발 환경
 <img width="621" alt="개발 환경" src="https://user-images.githubusercontent.com/78437105/126042726-f3beef84-cba8-4b82-a364-03ffd0326c24.png">
----
+
 ## 사용 기술
 <img width="591" alt="사용 기술" src="https://user-images.githubusercontent.com/78437105/126042740-81b8bf59-d962-45be-9f81-0cc1c64bcc25.png">
 ---
