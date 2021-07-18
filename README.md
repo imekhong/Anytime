@@ -2,6 +2,16 @@
 애니타임 프로젝트
 (프로젝트 저장소를 다시 만들었습니다.)
 
+## 목차
+- [목적](## 목적)
+- [기획](## 기획)
+- [프로젝트 주요기능](## 프로젝트 주요기능)
+- [개발 환경](## 개발 환경)
+- [개발 기술](## 개발 기술)
+- [USECASE](## USECASE)
+- [화면 설계 및 구현](## 화면 설계 및 구현)
+- [프로젝트 DB ERD](## 프로젝트 DB ERD)
+
 ## 목적
  - 기본에 충실하여 게시판을 구현함으로써 기본적인 CRUD를 익히자
  - Open API를 사용하여 API를 통해 얻어오는 결과값을 활용하는 법을 익히자
@@ -68,18 +78,31 @@
  - 학교게시판은 학교구분 없이 모든 게시물을 보고 삭제할 수 있다.
  - 모든 댓글을 보고 삭제할 수 있다.
 
-## 화면 설계
+## 화면 설계 및 구현
 ### Main 화면 프로토타입
 <img width="475" alt="메인페이지" src="https://user-images.githubusercontent.com/78437105/126044520-33a0e74b-2b09-4659-adda-210287ba89cc.png">
+- [Main 구현 화면 보기](./docs/projectPage/main.md)
+
+### 회원가입, 로그인 화면
+- [회원가입, 로그인 구현 화면 보기](./docs/projectPage/member.md)
 
 ### 게시판 화면 프로토타입
 <img width="711" alt="게시판" src="https://user-images.githubusercontent.com/78437105/126044526-afe15959-0240-4e25-b1ad-2a3668c82ab1.png">
+- [게시판 구현 화면 보기](./docs/projectPage/board.md)
 
 ### 시간표 화면 프로토타입
 <img width="634" alt="시간표" src="https://user-images.githubusercontent.com/78437105/126044529-1eb2cc8a-4dc4-4be2-856f-7759784cddf0.png">
+- [시간표 구현 화면 보기](./docs/projectPage/timetalbe.md)
 
 ### 성적계산기 화면 프로토타입
 <img width="339" alt="점수 계산기" src="https://user-images.githubusercontent.com/78437105/126044554-7c190713-ec08-4fc3-8414-df7a0ed560c9.png">
+- [성적계산기 구현 화면 보기](./docs/projectPage/scoreCalculator.md)
+
+### 책방 화면
+- [책방 구현 화면 보기](./docs/projectPage/bookshop.md)
+
+### 관리자 화면
+- [관리자 구현 화면 보기](./docs/projectPage/admin.md)
 
 ## 프로젝트 DB ERD
 <img width="1200" alt="ERD" src="https://user-images.githubusercontent.com/78437105/126057536-8c6a9a16-29e2-4b60-a683-8f423eca098d.png">
