@@ -3,8 +3,8 @@
 (프로젝트 저장소를 다시 만들었습니다.)
 
 ## 목차
-- [목적](## 목적)
-- [기획](## 기획)
+-[목적](## 목적)
+[기획](## 기획)
 - [프로젝트 주요기능](## 프로젝트 주요기능)
 - [개발 환경](## 개발 환경)
 - [개발 기술](## 개발 기술)
@@ -81,10 +81,10 @@
 ## 화면 설계 및 구현
 ### Main 화면 프로토타입
 <img width="475" alt="메인페이지" src="https://user-images.githubusercontent.com/78437105/126044520-33a0e74b-2b09-4659-adda-210287ba89cc.png">
-- [Main 구현 화면 보기](./docs/projectPage/main.md)
+-[Main 구현 화면 보기](./docs/projectPage/main.md)
 
 ### 회원가입, 로그인 화면
-- [회원가입, 로그인 구현 화면 보기](./docs/projectPage/member.md)
+[회원가입, 로그인 구현 화면 보기](./docs/projectPage/member.md)
 
 ### 게시판 화면 프로토타입
 <img width="711" alt="게시판" src="https://user-images.githubusercontent.com/78437105/126044526-afe15959-0240-4e25-b1ad-2a3668c82ab1.png">
