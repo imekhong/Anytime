@@ -35,4 +35,4 @@
 ## 댓글 기능
 - 본인이 쓴글만 수정, 삭제 가능
 - 대댓글 쓰기 가능
-<img width="934" alt="댓글" src="https://user-images.githubusercontent.com/78437105/126066821-44a38481-3845-4fe2-9eb7-4963fc8d6b4f.png">
+<img width="873" alt="댓글" src="https://user-images.githubusercontent.com/78437105/126066933-10d587f1-8c00-4747-924c-76b6b7d1fbae.png">
