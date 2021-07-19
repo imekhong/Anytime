@@ -38,7 +38,7 @@ public class SchoolBoardServiceImpl implements SchoolBoardService{
 		int allCount = 1;
 		if(keyword == null) {
 			allCount = boardRepository.listCount(map);
-		}else if(keyword.equals("tag")){
+		}else if(searchType.equals("tag")){
 			allCount = boardRepository.tagListCount(map);
 		}else {
 			allCount = boardRepository.searchListCount(map);
@@ -54,7 +54,7 @@ public class SchoolBoardServiceImpl implements SchoolBoardService{
 		map.put("end", end);
 		if(keyword == null) {
 			list = boardRepository.getListLike(map);
-		}else if(keyword.equals("tag")){
+		}else if(searchType.equals("tag")){
 			list = boardRepository.getTagListLike(map);
 		}else {
 			list = boardRepository.getSearchListLike(map);

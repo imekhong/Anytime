@@ -1,4 +1,4 @@
-package com.anytime.root.kakaoLogin.service;
+package com.anytime.root.api.kakaoLogin;
 
 import org.springframework.stereotype.Component;
 

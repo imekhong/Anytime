@@ -128,19 +128,22 @@ li{
 		});
 		
 		$("#reset_btn").click(function(){
-			$.ajax({
-    			url: "${contextPath}/reset",
-                type: "POST",
-                data: {
-                	id: '${userId}',
-                	semester: '${semester}',
-                	selc: '${selc}'
-                },
-                success: function () {
-                	alert("초기화 완료");
-                	location.reload();
-                }
-			})
+			var returnValue = confirm('정말 삭제하시겠습니까?');
+			if(returnValue === true){
+				$.ajax({
+	    			url: "${contextPath}/reset",
+	                type: "POST",
+	                data: {
+	                	id: '${userId}',
+	                	semester: '${semester}',
+	                	selc: '${selc}'
+	                },
+	                success: function () {
+	                	alert("초기화 완료");
+	                	location.reload();
+	                }
+				});
+			}
 		});
 		
 		function show(){

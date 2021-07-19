@@ -46,6 +46,10 @@ public class JoinServiceImpl implements JoinService{
 			securePW = encoder.encode((String)user.get("pwd"));
 			dto.setPassWord(securePW);
 			dto.setAuth("generalUser");
+		}else if(UserJoinAuth.equals("naverJoin")){
+			securePW = encoder.encode(randomPW());
+			dto.setAuth("naverUser");
+			dto.setPassWord(securePW);
 		}else {
 			securePW = encoder.encode(randomPW()); // 랜덤한 숫자 네자리를 그냥 암호화해서 넣어버리기
 			dto.setAuth("kakaoUser");

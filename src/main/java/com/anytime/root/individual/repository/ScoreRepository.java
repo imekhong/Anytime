@@ -17,6 +17,7 @@ public interface ScoreRepository {
 	public void add(Score score);
 	public void reset(@Param("id") String id, @Param("semester")String semester, @Param("selc")String selc);
 	public ArrayList<String> getSubjectList(@Param("id") String id, @Param("semester")String semester);
-	public List<Map<String, Object>> getForChart(@Param("id")String id, @Param("semester")String semester, @Param("subject_list")ArrayList subject_list);
+//	public List<Map<String, Object>> getForChart(@Param("id")String id, @Param("semester")String semester, @Param("subject_list")ArrayList subject_list);
+	public List<ArrayList<Integer>> getForChart(@Param("id")String id, @Param("semester")String semester, @Param("subject_list")ArrayList subject_list);
 	public ArrayList<Integer> getScoreForChart(@Param("id")String id, @Param("semester")String semester, @Param("type")String type);
 }
