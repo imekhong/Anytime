@@ -42,6 +42,11 @@ public class LoginController {
 	@Autowired
 	LoginService ls;
 	
+	@RequestMapping(value = "loginView")
+	public String LoginView() {
+		return "login/loginView";
+	}
+	
 	@RequestMapping(value="auth/naver/login")
 	public String naverLogin(HttpSession session) {
 		return "redirect:"+naverLoginService.getAuthorizationUrl(session, NaverLoginInfo.LOGIN_REDIRECT_URI);
@@ -103,11 +108,6 @@ public class LoginController {
 
 		// 로그인 안됐을때 (alret 창 나중에 띄어주기)
 		ScriptUtils.alertAndMovePage(response, "없는 아이디입니다 회원가입시도해주세요.", "/root/selectJoin");
-	}
-
-	@RequestMapping(value = "loginView")
-	public String LoginView() {
-		return "login/loginView";
 	}
 
 	@GetMapping("auth/naver/logout")

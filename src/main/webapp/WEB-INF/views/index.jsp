@@ -228,6 +228,7 @@ input[type="button"],input[type="submit"],input[type="search"] {
         <p class="school">${userId}</p>
         <p class="school">${userschoolname}고</p>
         <p>${loginuserAuth}</p>
+        <p>${userAuth }</p>
         <ul class="buttons">
        
         <li>

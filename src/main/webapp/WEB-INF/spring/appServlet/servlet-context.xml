@@ -35,16 +35,39 @@
         <beans:property name="viewClass" 
                         value="org.springframework.web.servlet.view.tiles3.TilesView" />
         <!-- tiles 세팅이 우선순위 1 -->
-        <beans:property name="order" value="1" />
+		<beans:property name="order" value="1" />
     </beans:bean> 
     <!-- viewResolver 설정 (사용자 view의 위치, 확장명 설정) -->	
-    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-      <beans:property name="prefix" value="/WEB-INF/views/" />
-      <beans:property name="suffix" value=".jsp" />
-      <!-- view file 우선순위 2 -->
-      <beans:property name="order" value="2" />
-    </beans:bean> 
-	
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+		<!-- view file 우선순위 2 -->
+		<beans:property name="order" value="2" />
+	</beans:bean> 
+    
+    <!-- interceptor 추가 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/board/common/list"/>
+			<mapping path="/board/school/list/*"/>
+			<mapping path="/score"/>
+			<mapping path="/timetable"/>
+			<mapping path="/bookshop"/>
+			<beans:bean id="commonInterceptor" class="com.anytime.root.common.interceptor.CommonInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/board/common/p/*"/>
+			<mapping path="/board/common/write"/>
+			<mapping path="/board/common/delete"/>
+			<mapping path="/board/common/modify*"/>
+			<mapping path="/board/school/p/**"/>
+			<mapping path="/board/school/write/*"/>
+			<mapping path="/board/school/delete/*"/>
+			<mapping path="/board/school/modify*"/>
+			<beans:bean id="authInterceptor" class="com.anytime.root.common.interceptor.AuthInterceptor"/>
+		</interceptor>
+	</interceptors>
+
 	<context:component-scan base-package="com.anytime.root" />
 	
 </beans:beans>
