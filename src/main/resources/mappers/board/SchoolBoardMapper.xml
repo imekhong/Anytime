@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.anytime.root.board.repository.SchoolBoardRepository">
+  <resultMap type="com.anytime.root.board.dto.SchoolBoard" id="board">
+		<id property="postNo" column="post_no"/>
+		<result property="writerId" column="writer_id"/>
+		<result property="nickname" column="nickname"/>
+		<result property="section" column="section"/>
+		<result property="subject" column="subject"/>
+		<result property="content" column="content"/>
+		<result property="views" column="views"/>
+		<result property="writeDate" column="write_date"/>
+		<result property="school" column="school"/>
+	</resultMap>
+	<resultMap type="com.anytime.root.board.dto.SchoolLikeBoard" id="likeBoard">
+		<id property="postNo" column="post_no"/>
+		<result property="writerId" column="writer_id"/>
+		<result property="nickname" column="nickname"/>
+		<result property="section" column="section"/>
+		<result property="subject" column="subject"/>
+		<result property="content" column="content"/>
+		<result property="views" column="views"/>
+		<result property="writeDate" column="write_date"/>
+		<result property="school" column="school"/>
+		<result property="like" column="good"/>
+	</resultMap>
+	<resultMap type="com.anytime.root.board.dto.Reply" id="reply">
+		<result property="replyNo" column="reply_no"/>
+		<result property="postNo" column="post_no"/>
+		<result property="parentNo" column="parent_no"/>
+		<result property="depth" column="depth"/>
+		<result property="writerId" column="writer_id"/>
+		<result property="nickname" column="nickname"/>
+		<result property="replyContent" column="reply_content"/>
+		<result property="writeDate" column="write_date"/>
+		<result property="school" column="school"/>
+	</resultMap>
+	<!-- paging을 위한 게시물 개수 -->
+	<select id="listCount" resultType="int">
+		select count(*) from school_board where section = #{section}
+		<if test="school != 'adminSchool'">
+			and school = #{school} 
+		</if>
+	</select>
+	<!-- 검색 결과 paging을 위한 게시물 개수 -->
+	<select id="tagListCount" resultType="int">
+		select count(*) from
+		(select post_no from tag_school_board where tag = #{keyword})A, 
+		(select post_no from school_board where section = #{section}
+		<if test="school != 'adminSchool'">
+			and school = #{school} 
+		</if>
+		)B where A.post_no = B.post_no
+	</select>
+	<select id="searchListCount" resultType="int">
+		select count(*) from school_board
+		<where>
+			<if test="searchType=='all'">
+				(content like '%' || #{keyword} || '%' or subject like '%' || #{keyword} || '%')
+			</if>
+			<if test="searchType=='subject'">
+				subject like '%' || #{keyword} || '%'
+			</if>
+			<if test="searchType=='content'">
+				content like '%' || #{keyword} || '%'
+			</if>
+			<if test="school != 'adminSchool'">
+				and school = #{school} 
+			</if>
+			 and section = #{section}
+		</where>
+	</select>
+	<!-- 게시물 list 얻기 -->
+	<select id="getListLike" resultMap="likeBoard">
+		select B.* from(select rownum rn, A.* from 
+		(select c.*, l.good from school_board c left outer join 
+		(select post_no, count(post_no) as good from like_school_board group by post_no) l on(c.post_no = l.post_no) 
+		order by c.post_no desc)A where section = #{section}
+		<if test="school != 'adminSchool'">
+			and school = #{school} 
+		</if>
+		)B where rn between #{start} and #{end}
+	</select>
+	<!-- 검색 결과 게시물 list 얻기 -->
+	<select id="getTagListLike" resultMap="likeBoard">
+		select B.* from(select rownum rn, A.* from 
+		(select D.*, L.good from(select C.* from school_board C, 
+		(select post_no from tag_school_board where tag = #{keyword})T where C.post_no = T.post_no)D left outer join 
+		(select post_no, count(post_no) as good from like_school_board group by post_no)L 
+		on(D.post_no = L.post_no) order by D.post_no desc)A where section = #{section} 
+		<if test="school != 'adminSchool'">
+			and school = #{school} 
+		</if>
+		)B where rn between #{start} and #{end}
+	</select>
+	<select id="getSearchListLike" resultMap="likeBoard">
+		select B.* from(select rownum rn, A.* from (select c.*, l.good 
+		from (select * from school_board
+		<where>
+			<if test="searchType=='all'">
+				content like '%' || #{keyword} || '%' or subject like '%' || #{keyword} || '%'
+			</if>
+			<if test="searchType=='subject'">
+				subject like '%' || #{keyword} || '%'
+			</if>
+			<if test="searchType=='content'">
+				content like '%' || #{keyword} || '%'
+			</if>
+		</where>
+		 )C left outer join (select post_no, count(post_no) as good from like_school_board group by post_no)l 
+		 on(c.post_no = l.post_no) order by c.post_no desc)A where section = #{section}
+		<if test="school != 'adminSchool'">
+			and school = #{school} 
+		</if>
+		  )B where rn between #{start} and #{end}
+	</select>
+	<insert id="writePost">
+		insert into school_board(writer_id, nickname, post_no, section, subject, content, school)
+		values(#{writerId}, #{nickname}, school_board_no_seq.nextval, #{section}, #{subject}, #{content}, #{school})
+	</insert>
+	<select id="viewPost" parameterType="int" resultMap="board">
+		select * from school_board where post_no = #{postNo}
+	</select>
+	<select id="viewPostNo" resultType="int">
+		select school_board_no_seq.currval from dual
+	</select>
+	<update id="modifyPost">
+		update school_board set nickname = #{nickname}, subject=#{subject}, content=#{content},
+		write_date=to_char(sysdate,'yyyy.mm.dd hh24:mi') where post_no = #{postNo}
+	</update>
+	<delete id="deletePost" parameterType="int">
+		delete from school_board where post_no = #{postNo}
+	</delete>
+	<update id="viewsUp">
+		update school_board set views = views+1 where post_no = #{postNo}
+	</update>
+	<select id="likeCheck" parameterType="com.anytime.root.board.dto.LikePost" resultType="int">
+		select count(*) from like_school_board where post_no = #{postNo} and id = #{id}
+	</select>
+	<update id="likeUpdate" parameterType="com.anytime.root.board.dto.LikePost">
+		insert into like_school_board(post_no, id) values(#{postNo}, #{id})
+	</update>
+	<delete id="likeDelete" parameterType="com.anytime.root.board.dto.LikePost">
+		delete from like_school_board where post_no = #{postNo} and id = #{id}
+	</delete>
+	<delete id="likeDeleteByPostNo" parameterType="int">
+		delete from like_school_board where post_no = #{postNo}
+	</delete>
+	<select id="likeCount" parameterType="int" resultType="int">
+		select count(*) from like_school_board where post_no = #{postNo}
+	</select>
+	<insert id="reply" parameterType="com.anytime.root.board.dto.Reply">
+		insert into reply_school_board(post_no, reply_no, writer_id, nickname, reply_content, school)
+		values(#{postNo}, school_reply_no_seq.nextval, #{writerId}, #{nickname}, #{replyContent}, #{school})
+	</insert>
+	<insert id="reReply" parameterType="com.anytime.root.board.dto.Reply">
+		insert into reply_school_board(post_no, reply_no, parent_no, depth, writer_id, nickname, reply_content, school)
+		values(#{postNo}, school_reply_no_seq.nextval, #{parentNo}, #{depth}, #{writerId}, #{nickname}, #{replyContent}, #{school})
+	</insert>
+	<select id="replyCount" parameterType="int" resultType="int">
+		select count(*) from reply_school_board where post_no = #{postNo}
+	</select>
+	<select id="replyList" parameterType="int" resultMap="reply">
+		select * from reply_school_board where post_no = #{postNo} 
+		start with parent_no = 0 connect by prior REPLY_NO = PARENT_NO
+	</select>
+	<update id="modifyReply" parameterType="com.anytime.root.board.dto.Reply">
+		update reply_school_board set nickname = #{nickname}, reply_content = #{replyContent},
+		write_date=to_char(sysdate,'yyyy.mm.dd hh24:mi') where reply_no = #{replyNo}
+	</update>
+	<delete id="deleteReply" parameterType="int">
+		delete from reply_school_board where reply_no = #{no} or parent_no = #{no}
+	</delete>
+	<delete id="deleteReplyByPostNo" parameterType="int">
+		delete from reply_school_board where post_no = #{postNo}
+	</delete>
+	<insert id="addTag">
+		insert into tag_school_board(post_no, tag) select #{postNo}, #{tag} from dual 
+		where not exists (select * from tag_school_board where post_no = #{postNo} and tag = #{tag})
+	</insert>
+	<select id="tagList" parameterType="int" resultType="String">
+		select tag from tag_school_board where post_no = #{postNo}
+	</select>
+	<delete id="deleteAllTag" parameterType="int">
+		delete from tag_school_board where post_no = #{postNo}
+	</delete>
+</mapper>

@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+label{
+	font-weight: bold;
+}
+
+
+input {
+	border-radius: 15px;
+	outline-color: #C62917;
+
+}
+
+select {
+	width : 80px;
+	height: 40px;
+	border-radius: 15px;
+	transition: all 2s;
+}
+
+select :active {
+	background-color: #C62917;
+	color: #C62917;
+}

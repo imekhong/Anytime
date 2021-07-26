@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<!-- tiles 모두 적용 -->
+	<definition name="tilesLayout" template="/WEB-INF/views/layout/TilesLayout.jsp">
+		<put-attribute name="siteTop" value="/WEB-INF/views/layout/header.jsp" />
+		<put-attribute name="siteBody" value="" />
+		<put-attribute name="siteBottom" value="/WEB-INF/views/layout/footer.jsp" />
+	</definition>
+	
+	<!--  타일 제외부분 -->
+	<definition name="empty" template ="/WEB-INF/views/layout/tilesempty.jsp">
+		<put-attribute name="siteBody" value="" />
+	</definition>	
+	
+	<!--  타일즈 모두 적용부분 -->
+	<definition name="*" extends="tilesLayout">
+		<put-attribute name="siteBody" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+	
+	<definition name="*/*" extends="tilesLayout">
+		<put-attribute name="siteBody" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	
+	<definition name="*/*/*" extends="tilesLayout">
+		<put-attribute name="siteBody" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+	</definition>
+	
+	
+	<!-- SearchSchool 제외부분 -->
+	<definition name="join/SearchSchool" extends ="empty">
+		<put-attribute name="siteBody" value ="/WEB-INF/views/join/SearchSchool.jsp"/>
+	</definition>
+	
+
+	
+	
+	<!-- tiles 일부 적용 -->
+	<!-- 
+	<definition name="*.tiles" extends="tilesLayout">
+		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+	
+	<definition name="*/*.tiles" extends="tilesLayout">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	 -->
+	<!-- 타일즈 미 적용 -->
+<!--
+	<definition name="normalLayout" template="/WEB-INF/views/layout/NormalLayout.jsp">
+		<put-attribute name="NormalLayout" value="" />
+	</definition>
+	
+	<definition name="*.jsp" extends="normalForm">
+		<put-attribute name="NormalLayout" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+		
+	<definition name="*/*.jsp" extends="normalForm">
+		<put-attribute name="NormalLayout" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+-->
+</tiles-definitions>
