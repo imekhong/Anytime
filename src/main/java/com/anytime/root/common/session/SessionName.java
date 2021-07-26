@@ -6,4 +6,5 @@ public interface SessionName {
 	static final String SCHOOL = "userSchool";
 	static final String SCHOOL_NAME = "userschoolname";
 	static final String AUTH = "userAuth";
+	static final String NAVER_LOGIN_TOKEN = "naverToken";
 }

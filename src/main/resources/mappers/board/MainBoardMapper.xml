@@ -72,7 +72,7 @@
 		(select A.* from 
 		(select c.*, l.good from cmn_board c left outer join 
 		(select post_no, count(post_no) as good from like_cmn_board group by post_no) l 
-		on(c.post_no = l.post_no) order by write_date desc)A where rownum < 5)B
+		on(c.post_no = l.post_no) order by c.post_no desc)A where rownum < 5)B
 	]]>
 	</select>
 	<select id="getSchoolBoardByDate" resultMap="likeschoolBoard">
@@ -81,7 +81,7 @@
 		(select A.* from 
 		(select c.*, l.good from school_board c left outer join 
 		(select post_no, count(post_no) as good from like_school_board group by post_no) l
-		 on(c.post_no = l.post_no) order by write_date desc)A
+		 on(c.post_no = l.post_no) order by c.post_no desc)A
 		 where section = #{section} and school = #{school})B where rownum < 5
 	]]>
 	</select>

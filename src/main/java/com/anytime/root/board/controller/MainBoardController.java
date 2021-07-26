@@ -46,8 +46,10 @@ public class MainBoardController {
 	public String main(Model model, HttpSession session) {
 		String id = (String)session.getAttribute(SessionName.ID);
 		String school = (String)session.getAttribute(SessionName.SCHOOL);
-		boardService.getMain(model, id, school);
-		
+		if(id == null) {
+			return "redirect:loginView";
+		}
+		boardService.getMain(model, id, school);		
 		//추가(사진 미리보기 부분)	
 		model.addAttribute("previewBookShop", BShopService.preViewBookShop());
 		model.addAttribute("previewBookShopPhoto", BShopService.preViewBookShopPhoto());

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html>
@@ -227,25 +227,32 @@ input[type="button"],input[type="submit"],input[type="search"] {
         <p class="nickname">${userNickname}</p>
         <p class="school">${userId}</p>
         <p class="school">${userschoolname}고</p>
+        <p>${loginuserAuth}</p>
+        <p>${userAuth }</p>
         <ul class="buttons">
        
         <li>
+        <a>쪽지함</a>
 	<c:choose>
+		<c:when test="${loginuserAuth == 'naverUser'}">
+      		<li><a href="${contextPath}/myinfo/${userId}">내 정보</a></li>
+       		<p><a href="${contextPath}/auth/naver/logout">로그아웃</a></p>
+      	</c:when>
       	<c:when test="${loginuserAuth == 'kakaoUser'}">
-      	<li><a href="${contextPath}/myinfo/${userId}">내 정보</a></li>
-       	<p><a href="https://kauth.kakao.com/oauth/logout?client_id=a924c282a86092b8472e6c2885aafe4a&logout_redirect_uri=http://localhost:8000/root/auth/kakao/logout">로그아웃</a></p>
+      		<li><a href="${contextPath}/myinfo/${userId}">내 정보</a></li>
+       		<p><a href="https://kauth.kakao.com/oauth/logout?client_id=a924c282a86092b8472e6c2885aafe4a&logout_redirect_uri=http://localhost:8000/root/auth/kakao/logout">로그아웃</a></p>
       	</c:when>
       	<c:when test="${loginuserAuth == 'generalUser'}">
-      	<li><a href="${contextPath}/myinfo/${userId}">내 정보</a></li>
-      	<p><a href="${contextPath}/generalUser/logout">로그아웃</a></p>
+      		<li><a href="${contextPath}/myinfo/${userId}">내 정보</a></li>
+      		<p><a href="${contextPath}/generalUser/logout">로그아웃</a></p>
       	</c:when>
       	<c:when test="${loginuserAuth == 'admin'}">
-      	<p><a href="${contextPath}/MemberManagement">회원관리</a></p>
-      	<p><a href="${contextPath}/generalUser/logout">어드민로그아웃</a></p>
+      		<p><a href="${contextPath}/MemberManagement">회원관리</a></p>
+      		<p><a href="${contextPath}/generalUser/logout">어드민로그아웃</a></p>
       	</c:when>
       	<c:otherwise>
-      	<p><a href="${contextPath}/selectJoin">회원가입</a></p>
-      	<p><a href="${contextPath}">로그인</a></p>
+      		<p><a href="${contextPath}/selectJoin">회원가입</a></p>
+      		<p><a href="${contextPath}">로그인</a></p>
       	</c:otherwise>
       	</c:choose></li>
         </ul>
@@ -258,7 +265,6 @@ input[type="button"],input[type="submit"],input[type="search"] {
         <div class="board" align="center"><hr>
           <a class="myarticle" href="${contextPath }/my/cboard?page=1">내가 쓴 글</a><hr>
           <a class="mycommentarticle" href="${contextPath }/my/creply">댓글 단 글</a><hr>
-          <hr>
         </div>
         </div>
         </div>

@@ -201,18 +201,28 @@ $(function(){
 	
 	// 댓글 삭제
 	function deleteReply(data1, data2){
-		$.ajax({
-			url: "${contextPath}/deleteReply",
-            type: "GET",
-            data: {
-            	replyNo : data1,
-            	depth : data2
-            },
-            success: function () {
-            	alert("삭제 완료");
-            	location.reload();
-            }
-		})
+		var returnValue = confirm('정말 삭제하시겠습니까?');
+		if(returnValue === true){
+			$.ajax({
+				url: "${contextPath}/deleteReply",
+	            type: "GET",
+	            data: {
+	            	replyNo : data1,
+	            	depth : data2
+	            },
+	            success: function () {
+	            	alert("삭제 완료");
+	            	location.reload();
+	            }
+			});
+		}
+	}
+	
+	function deletePost(){
+		var returnValue = confirm('정말 삭제하시겠습니까?');
+		if(returnValue === true){
+			location.href='${contextPath }/delete?no=${board.postNo}';
+		}
 	}
 </script>
 </head>
@@ -238,7 +248,7 @@ $(function(){
 				<button type="button" class="w3-bar-item w3-button w3-border" onClick="location.href='${contextPath }/modify?no=${board.postNo}'">
 					<i class="fa fa-exchange"></i> 글 수정
 				</button>
-				<button type="button" class="w3-bar-item w3-button w3-border" onClick="location.href='${contextPath }/delete?no=${board.postNo}'">
+				<button type="button" class="w3-bar-item w3-button w3-border" onClick="deletePost();">
 					<i class="fa fa-remove"></i> 글 삭제
 				</button>
 			</c:if>
@@ -280,7 +290,7 @@ $(function(){
 					<span><i class="far fa-comment-dots"></i>&nbsp;${replyCount }</span>&nbsp;
 				</div>
 			</div>
-			<article class="w3-border w3-large w3-padding" style="height:500px;">${ board.content }</article>
+			<article class="w3-border w3-large w3-padding" style="min-height:200px;">${ board.content }</article>
 		</div>
 		<!-- 댓글 -->
 		<c:forEach var="list" items="${replyList }">

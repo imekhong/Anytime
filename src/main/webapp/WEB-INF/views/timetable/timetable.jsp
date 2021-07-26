@@ -176,19 +176,22 @@
 		});
 
 		$("#reset_btn").click(function(){
-			$.ajax({
-    			url: "${contextPath}/reset",
-                type: "POST",
-                data: {
-                	id: '${userId}',
-                	semester: '${semester}'
-                },
-                success: function () {
-                	alert("초기화 완료");
-                	$("#set_wrap").hide();
-                	location.reload();
-                },
-    		})
+			var returnValue = confirm('정말 삭제하시겠습니까?');
+			if(returnValue === true){
+				$.ajax({
+	    			url: "${contextPath}/reset",
+	                type: "POST",
+	                data: {
+	                	id: '${userId}',
+	                	semester: '${semester}'
+	                },
+	                success: function () {
+	                	alert("초기화 완료");
+	                	$("#set_wrap").hide();
+	                	location.reload();
+	                },
+	    		});
+			}
 		});
 		
 		function getRandomColor(){
